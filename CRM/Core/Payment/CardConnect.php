@@ -48,6 +48,34 @@ class CRM_Core_Payment_CardConnect extends CRM_Core_Payment
     }
 
     /**
+     * This function checks to see if we have the right config values.
+     *
+     * @return string
+     *   The error message if any.
+     *
+     * @public
+     */
+    function checkConfig()
+    {
+        $config = CRM_Core_Config::singleton();
+        $error = array();
+
+        if (empty($this->_paymentProcessor['user_name'])) {
+            $error[] = ts('The "Username" is not set in the CardConnect Payment Processor settings.');
+        }
+
+        if (empty($this->_paymentProcessor['password'])) {
+            $error[] = ts('The "Password" is not set in the CardConnect Payment Processor settings.');
+        }
+
+        if (!empty($error)) {
+            return implode('<p>', $error);
+        } else {
+            return NULL;
+        }
+    }
+
+    /**
      * Function to handle various errors for CardConnect
      */
     function handleCardConnectError($error_type = 'no_response', $request, $params, $payment_response)

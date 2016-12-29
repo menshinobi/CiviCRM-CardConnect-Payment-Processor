@@ -238,7 +238,7 @@ function cardconnect_civicrm_managed(&$entities) {
 
   $entities[] = array(
       'module' => 'com.sof.cardconnect',
-      'name' => 'CardConnect',
+      'name' => 'CardConnect_cron',
       'entity' => 'Job',
       'update' => 'never', // Ensure local changes are kept, eg. setting the job active
       'params' => array (
