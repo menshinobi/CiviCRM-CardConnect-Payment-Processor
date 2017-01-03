@@ -195,7 +195,7 @@ class CRM_Core_Payment_CardConnect extends CRM_Core_Payment
         $request = array(
             'merchid' => $api_credentials['mid'],
             'cvv2' => $params['cvv2'],
-            'amount' => number_format($params['amount'], 2),
+            'amount' => number_format($params['amount'], 2, '.', ''),
             'currency' => $params['currencyID'],
             'orderid' => CRM_Utils_Array::value('invoiceID', $params),
             'name' => $cc_name,
@@ -293,7 +293,7 @@ class CRM_Core_Payment_CardConnect extends CRM_Core_Payment
                 continue;
             }
 
-            $amount = number_format($pending_contribution['contribution']->total_amount, 2);
+            $amount = number_format($pending_contribution['contribution']->total_amount, 2, '.', '');
             $parts = explode("_", $pending_contribution['contribution_recur']->processor_id);
             $token = $parts[1];
             $month_year = explode("/", $parts[0]);
@@ -415,7 +415,7 @@ class CRM_Core_Payment_CardConnect extends CRM_Core_Payment
 
             $request = array(
                 'merchid' => $api_credentials['mid'],
-                'amount' => number_format($contribution->amount, 2),
+                'amount' => number_format($contribution->amount, 2, '.', ''),
                 'currency' => strtoupper($contribution->currency),
                 'orderid' => $invoice_id,
                 'capture' => 'Y',
